@@ -1,6 +1,16 @@
-\section{Les algorithmes d'alignement des reads}
+\section{Les algorithmes de classification des reads}
 
 	\begin{itemize}
-		\item[•] principe de la méthode des k-mers contigus
-		\item[•] principe de la méthode des k-mers à graines espacées 
+		\item[•] méthode des k-mers contigus dans la classification métagénomique
+                  \begin{itemize}
+                  \item construction des k-mers de longueur l sur un read de longueur L, décalé à la fois d'une seule base
+                  \item nb de k-mers = L-l+1
+                  \end{itemize}
+		\item[•] méthode des k-mers espacées
+                  \begin{itemize}
+                  \item concept venant directe des graines espacées des alignements par extension de graine
+                  \item graines espacées: proposé par \cite{Ma2002} dans son algo PatternHunter pour garder la rapidité de comparaison lors des alignements par graines (cette rapidité diminue dû à l'augmentation des tailles des bases de données) tout en augmentant la sensibilité
+                  \item nombre de hit: nb de k-mers (espacées) retrouvés dans le génome de référence
+                  \item couverture: nb total de positions couvertes par tous les k-mers matchés
+                  \end{itemize} 
 	\end{itemize}

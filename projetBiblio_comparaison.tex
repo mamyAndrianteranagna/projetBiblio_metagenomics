@@ -1,6 +1,21 @@
 \section{Comparaison des deux algorithmes d'alignement}
 
 	\begin{itemize}
-		\item[•] comparaison sur la sensibilité-spécificité des résultats
-		\item[•] comparaison sur l'implémentation, la compléxité temporelle et spatiale
+        \item[•] comparaison sur la sensibilité-spécificité des résultats
+          \begin{itemize}
+          \item utilisation de Kraken \cite{Wood2014} adapté pour traiter les k-mers espacées $\rightarrow$ seed-Kraken
+          \item données utilisée pour la comparaison entre les deux méthodes: 3 données métagénomiques simulées (HiSeq, MiSeq, Simba-5) chacun contenant 10000 séquences et 1 donnée réel construite à partir de 50000 séquences sélectionnées de SRS011086 de l'Human Microbiome Project (HMPtongue)
+          \item MiSeq $\leftarrow$ reads de 10 génomes bactériens (illumina, simulé)
+          \item HMPtongue $\leftarrow$ provenant de reads séléctionnées au hasard (illumina, données réelle)
+          \item base de données (référence): composé de 915 genomes bactériens (un par espèces + génomes de toutes les souches bactériennes à partir desquelles les données simulées ont été construites)
+          \item paramètre de comparaison: sensibilité et précision de classification sur trois niveaux taxonomique: famille, genre et espèce.
+          \item $sensibilite=\frac{nb \phantom{a} de \phantom{a} reads \phantom{a} correctement \phantom{a} classifie}{nb \phantom{a} total \phantom{a} des \phantom{a} reads}$
+          \item $precision=\frac{nb \phantom{a} de \phantom{a} classification \phantom{a} correcte}{nb \phantom{a} total \phantom{a} des \phantom{a} classification}$
+          \item fig3 de l'article $\rightarrow$ gain en sensibilité et en précision avec les k-mers espacées au niveau classification par genre et par famille (poids faible $rightarrow$ plus de sensibilité et moins de précision, poids élevées $rightarrow$ moins de sensibilité mais plus de précision, gain en sensibilité plus marqué au niveau classification par famille), un léger gain en sensibilité et une diminution en précision au niveau classification par espèce
+          \end{itemize}
+        \item[•] comparaison sur l'implémentation, la compléxité temporelle et spatiale
+          \begin{itemize}
+          \item adaptation de Kraken: indexation du complément de chaque k-mers espacés $\Rightarrow$ augmentation de l'espace mémoire utilisée et du temps de recherche de k-mers
+          \item temps de calcul lors de classification augmenté de 3 à 5 fois avec seed-kraken comparé à kraken
+          \end{itemize} 
 	\end{itemize}
