@@ -1,44 +1,62 @@
 \section{Introduction}
 
-	\begin{itemize}
-		
-        \item[•] définition et buts de la métagénomique
-          \begin{itemize}
-          \item métagénomique = étude des populations microbiennes via le métagénome
-          \item métagénome = ensemble des génomes de tous les espèces présentes dans un environnement donné
-          \item métagénomique $\rightarrow$ identification, classification et quantification des espèces microbiennes présentes dans un échantillon d'un milieu donné
-          \item métagénomique $\rightarrow$ exploration des populations microbiennes des océans, du sol, des tubes digestifs, etc.
-          \item métagénomique $\rightarrow$ étude des espèces microbiennes non cultivables
-          \item métagénomique $\rightarrow$ assemblage de novo des génomes bactériens et des archés
-          \item métagénomique $\rightarrow$ découverte de fonction de protéine et d'enzyme
-          \end{itemize}
+\subsection{Définition et buts de la métagénomique}
           
-        \item[•] historique et évolution de la métagénomique \cite{Handelsman2004a}
-          \begin{itemize}
-          \item milieux des années 80 : prise de conscience des microbiologistes sur l'importance et le besoin d'étudier les microorganismes non cultivables \cite{Torsvik1990} $rightarrow$ classification (phylogénétique) des espèces présentes dans un milieux sauvage donné, grace à l'utilisation de plus en plus facile des séquences d'ARNr 16S (phylogenetic stain) rendue facile (cette facilité est due à des progrès techniques telles que publié dans \cite{lane1985})
-          \item début des années 90: PCR $\rightarrow$ possibilité de cloner entièrement le gène d'ARNr 16S à partir du milieu sans passer par des techniques lourdes $\Rightarrow$ rapidité et efficacité de la détermination et classification des nouvelles espèces microbiennes \cite{Schmidt1991}
-          \item fin des années 90 : naissance de l'appellation métagénomique \cite{Handelsman1998}
-          \item au début, la métagénomique sert uniquement à identifier les espèces présentes dans le milieu étudié ou des métabolites ayant une certaine fonction puis, par la suite, elle permet aussi de caractériser ces espèces et leurs rôles dans le milieu (et leurs abondances?)
-          \end{itemize}
-          
-        \item[•] approches de la métagénomique
-          \begin{itemize}
-          \item approche par séquençage (sequence-based analysis): séquençage des marqueurs de phylogénétiques (ex. ARNr16S très à la mode à partir du début des années 90 $\leftarrow$ découverte et utilisation de la PCR) ou shotgun sequencing (très à la mode après l'apparition de NGS dans la deuxième moitié du XXI\up{ème} siècle) $\rightarrow$ identification, quantification
-          \item approche fonctionnelle (functionnal métagénomics) $\rightarrow$ hétérologous expression (\textit{E.coli})
-          \end{itemize}
-          
-        \item[•] la nouvelle génération de métagénomique et la classification métagénomique
-          \begin{itemize}
-          \item apparition de NGS $\Rightarrow$ shotgun sequencing metagenomics \cite{Ranjan2015}
-          \item objectif de la classification (binning): comparaison des frangments de séquences (reads) à une séquence génomique de référence (dans le cas de la classification dépendante) afin de les classifier dans une taxonomie donnée
-          \item méthodes de classifications: amplicon-based et shotgun sequencing based \cite{Mande2012}, taxonomy dependent ($\rightarrow$ classification supervisée $\rightarrow$ utilisation de références phylogénétiquement connues) or taxonomy independent ($\rightarrow$ classification non supervisée)
-          \item méthode de classification la plus répandue pour shotgun sequencing metagenomics $\rightarrow$ comptage des k-mers communs (entre les reads et chaque génome de référence) $\rightarrow$ classification
-          \item outils actuellement disponibles en ligne pour l'analyse métagénomique résumés dans \cite{Dudhagara2015}
-          \end{itemize}
+          La métagénomique est l'étude des populations microbiennes via le \og métagénome \fg.
+          Le métagénome est l'ensemble des génomes de tous les espèces présentes dans un environnement donné.
+          La métagénomique consiste à l'identification, à la classification, à la quantification et à la caractérisation des espèces microbiennes qui peuplent un échantillon d'un milieu donné.
+          Elle permet l'exploration des populations microbiennes des milieux naturels tels que les océans, le sol, les tubes digestifs des animaux, etc. sans culture préalable.
 
-        \item[•] objectif de l'étude bibliographique
-          \begin{itemize}
-            \item proposition de \cite{Brinda2015} d'utiliser les k-mers espacés à la place des k-mers contigus pour améliorer la sensibilité/spécificité de la classification
-            \item objectif: comparaison des résultats de classification (sensibilité/spécificité), comparaison sur l'implémentation et la complexité
-          \end{itemize}
-	\end{itemize}
+          Ainsi, la métagénomique permet l'étude des espèces microbiennes non cultivables c'est-à-dire qu'elles ne peuvent pas être cultivées en milieu artificiel ou qu'elles ne sont jamais été l'objet d'une culture justement parce qu'elles ne sont pas encore été identifiées.
+
+          En outre, sur le plan génomique et génétique, la métagénomique permet l'assemblage de novo des génomes de ces espèces non cultivables ainsi que la prédiction et l'annotation fonctionnelle des gènes.
+          Sur le plan biochimique, elle a permi la découverte de fonction de nombreuses protéines et enzymes.
+
+          Bref, la métagénomique regroupe tout ce qui est étude qu'on peut réaliser à partir de l'extraction de l'ensemble de génomes de tous les espèces microbiennes d'un milieu donnée sans avoir à les connaîtres \textit{a priori}. 
+          
+          
+\subsection{Historique et évolution de la métagénomique} 
+
+
+%\cite{Handelsman2004a}
+ 
+          Vers le milieux des années 80, les microbiologistes commencent à prendre conscience de l'importance écrasante des espèces microbiennes non cultivables et qu'il n'est plus raisonnable de les ignorer \cite{Torsvik1990}. A titre d'information, seul 1 \% de la totalité des espèces microbiennes sont cultivables. De cette prise de conscience se découle alors le besoin de classifier phylogénétiquement des espèces présentes dans un milieux sauvage donné. Ceci a été possible grace à l'avancé de la biologie moléculaire et à l'utilisation de plus en plus facile des séquences d'ARNr 16S comme marqueur phylogénétique \cite{lane1985}.
+
+          Une autre grande avancée de la biologie moléculaire est survenues au début des années 90. C'est la possibilité de cloner et d'amplifier un fragment d'ADN à partir de n'importe quel milieu grace à la réaction en chaîne des polymérases connue sous le nom de PCR. Cela a permi de de cloner entièrement le gène d'ARNr 16S directement à partir du milieu naturel sans passer par des techniques laborieuses. Cette avancée technologique accélère la détermination et classification des nouvelles espèces microbiennes et, encore une fois, démontre l'importance des espèces non cultivables \cite{Schmidt1991}.
+
+          Si tout cela s'agit déjà de la métagénomique, ce n'est que vers la fin des années 90 que le terme \og métagénomique \fg a été utilisé pour la première fois pour désigner ce genre d'étude \cite{Handelsman1998}.
+
+          Actuellement, l'apparition du NGS vers la deuxième moitié du XXI\up{ème} siècle ont totalement bouleversé la métagénomique. 
+                   
+\subsection{Les différentes approches de la métagénomique}
+
+Comme nous avons dit précédemment, l'étude métagénomique commence toujours par l'extraction du métagénome du milieu. A partir de là, deux approches peuvent être suivies: l'approche fonctionnelle et l'approche par séquençage.            
+
+          L'\textit{approche fonctionnelle} ou métagénomique fonctionnelle consiste à exprimer les différents fragments provenant du métagénomes dans des organismes d'expréssion hétérologue tel que l'\textit{Escherichia coli} et d'en identifier des fonctions grace à des techniques enzymatiques.
+
+          L'\textit{approche par séquençage}, que nous appelons métagénomique par séqueçage consiste à séquencer les fragements du métagénome et d'analyser ces séquences notamment pour quantifier et classifier les espèces qui sont présentes dans le milieu étudié. Pour cela, le clonage et le séquençage uniquement des marqueurs de phylogénétiques, tel que l'ARNr16S, a été très à la mode à partir du début des années 90 grace à la découverte de la PCR. A l'heure actuelle, le séquençage de tous les fragments métagénomiques ou shotgun sequencing est largement utilisé après l'apparition de la NGS \cite{Ranjan2015}.
+
+
+\subsection{La métagénomique par séquençage et la classification métagénomique}
+
+          Le séquençage massif à haut débit (NGS) a permis à l'approche par séquençage d'être l'approche la plus répandue dans les études métagénomiques actuelles.
+          La classification métagénomique (\textit{binning} en anglais) est le fait de classer les fragments de séquences du métagénome. Elle peut être dirigée ou pas selon le type de fragment à classifier. 
+
+          La classification dirigée utilise un seul fragment ou amplicon, dans la plupart des cas, des marqueurs phylogénétiques connus comme le gène d'ARNr 16S. Cette méthode de classification est aussi appelée, dans la littérature, \textit{amplicon-based classification} ou métagénomique dirigée.
+          La classification non dirigée, quant à elle, utilise l'ensemble des fragments du métagénome, c'est à dire tous les \textit{reads}. Elle est aussi appelée \textit{shotgun sequencing-based classification} ou métagénomique non dirigée \cite{Mande2012} et, actuellement, la plus utilisée.
+
+          Selon l'utilisation ou pas des génomes de référence, la classification peut être à taxonomie dépendante ou à taxonomie indépendante. 
+          La classification à taxonomie dépendante utilise des génomes de références phylogénétiquement connues. Il s'agit alors d'une classification supervisée et c'est la méthode de classification la plus utilisée. 
+          La classification à taxonomie indépendant n'utilise pas de génomes de références et s'agit d'une classification non supervisée. 
+          
+          De nombreux outils sont actuellement disponibles en ligne pour l'analyse et la classification métagénomique. Les plus connus d'entre eux sont présentés par \cite{Dudhagara2015}.
+          
+
+\subsection{Problématique et objectif de l'analyse bibliographique}
+          
+          Pour cette étude bibliographique, ce qui nous intéresse est la classification non dirigée et à taxonomie dépendante qui utilise des génomes de références afin classifier l'ensemble des reads.
+          Dans ce contexte, deux méthodes sont actuellement les plus utilisées : la méthode basée sur l'alignement des séquences et la méthode non basée sur l'alignement \cite{Mande2012}. Parmi la méthode non basée sur l'alignement, il y a le comptage des k-mers communs entre le read et le génome de référence. Cette méthode est utiisée par de nombreux outils publiés récemment tels que LMAT \cite{Ames2013}, Kraken \cite{Wood2014}.
+          Afin d'améliorer la sensibilité/spécificité de la classification utilisant la méthode des k-mers commun, \cite{Brinda2015} suggère l'utilisation des k-mers espacés à la place des k-mers contigus.
+            
+          Dans ce travail bibliographique, nous essayons d'analyser cette nouvelle approche de classification proposée par \cite{Brinda2015}.
+          Dans un premier temps, nous allons présenter le principe de k-mers espacées. Dans un second temps, nous allons analyser les résultats obtenus en comparant les deux méthodes. Et enfin, nous allons discuter de l'intérêt de cette nouvelle approche de classification utilisant les k-mers communs dans le contexte actuel de la métagénomique.

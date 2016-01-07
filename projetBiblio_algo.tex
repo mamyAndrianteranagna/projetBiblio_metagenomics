@@ -1,17 +1,30 @@
-\section{Les algorithmes de classification des reads}
+\section{Les algorithmes de classification utilisant des k-mers communs}
 
-	\begin{itemize}
-		\item[•] méthode des k-mers contigus dans la classification métagénomique
-                  \begin{itemize}
-                  \item construction des k-mers de longueur l sur un read de longueur L, décalé à la fois d'une seule base
-                  \item nb de k-mers = L-l+1
-                  \end{itemize}
-		\item[•] méthode des k-mers espacées
-                  \begin{itemize}
-                  \item concept venant directe des graines espacées des alignements par extension de graine
-                  \item graines espacées: proposé pour la première fois par \cite{Ma2002} dans son algo PatternHunter pour garder la rapidité de comparaison lors des alignements par graines (cette rapidité diminue dû à l'augmentation des tailles des bases de données) tout en augmentant la sensibilité
-                  \item nombre de hit: nb de k-mers (espacées) retrouvés dans le génome de référence
-                  \item couverture: nb total de positions couvertes par tous les k-mers matchés
-                  \item proposés par différents auteurs pour améliorer différentes méthodes d'alignement de reads dans différents contexte d'analyse NGS: Chip-Seq \cite{Ghandi2014}, reconstruction phylogénétique \cite{Leimeister2014}, 
-                  \end{itemize} 
-	\end{itemize}
+Le k-mer est définit comme un sous-mot de longueur k contenu dans un mot.
+Comme un read est un fragment de séquence génomique issus du séquençage à haut débit, il est constitué de k-mers. 
+Un read de longueur L contient L-k+1 k-mers de longueur k décalé à la fois d'une seule base.
+Ceci est appelé des k-mers contigüs qui sont utilisés dans de nombreux analyses de séquence issue de la NGS. 
+
+
+\subsection{Les k-mers contigüs et la classification métagénomique}
+
+Dans la classification métagénomique, les k-mers contigüs peuvent être utilisés soit pour l'alignement des reads aux génomes de références (mapping), soit pour comparer ceux-ci aux génomes de références sans tenir compte des positions. 
+Dans le dernier cas, qui est plus économique en temps et en espace, le nombre d'occurence de chaque k-mer d'un read donnée est enregistré pour chaque génome de référence.
+Afin d'illustrer comment ça marche cette algorithme, nous allons nous baser avec ce que fait l'outil Kraken pour classer les reads métagénomiques.
+
+Pour classifier un read, Kraken \cite{Wood2014} cherche chaque k-mer de ce read dans chaque génome de référence. Il associe alors le k-mer donné au noeud représentant le plus ancien ancêtre commun des génomes de références dans lesquelles il apparaît. Un poids correspondant au nombre de k-mers associé (nombre de hit) est alors attribué à chaque noeud. Le reads est alors classé au niveau de la taxa dont la somme des poids de la racine à la feuille est la plus élevée.
+
+
+\subsection{Les k-mers espacées, une alternative aux k-mers contigüs dans la classification métagénomique}
+                  
+Le concept de k-mer espacé vient des graines espacées. 
+L'alignement par extension de graine est notamment utilisé pour comparer une séquence donnée avec des séquences dans une base de donnée (par exemple le cas de BLAST). 
+Cependant, la taille de la base de donnée qui ne cesse d'augmenter ralentisse la comparaison.
+Afin de palier à cela, Ma \textit{et al.}\cite{Ma2002} ont proposé pour la première fois, dans son algo PatternHunter, l'utilisation de graine espacée tout en augmentant la sensibilité des résultats. Des nombreuses études ultérieures ont repris ce concepte dans différents type d'analyse de séquence génomique.
+
+Dans la classification métagénomique que nous étudions ici, l'utilisation de k-mers espacées est proposée à la place des k-mers contigü que nous venons de voir dans la sous-section précédente.
+L'objet est d'introduire des trous au niveau de chaque k-mer. Ces trous, ou joker, représenté par un \og-\fg, peuvent prendre n'importe quelle base lors de la comparaison. Les autres bases autre que les jokers sont représenté par un \og\#\fg dont le nombre total représente le poids du k-mer.
+Deux métriques peuvent alors être mésurés pour un read : le nombre de hit (nombre de k-mers retrouvés dans le génome de référence) et la couverture ou le nombre total de positions couvertes par tous les k-mers matchés. Ce sont ces métriques qui seront utilisé pour classifier les reads.
+
+Le k-mer espacé est aussi proposés par différents auteurs pour améliorer différentes méthodes d'alignement de reads dans différents contexte d'analyse NGS: Chip-Seq \cite{Ghandi2014}, reconstruction phylogénétique \cite{Leimeister2014}, etc.
+

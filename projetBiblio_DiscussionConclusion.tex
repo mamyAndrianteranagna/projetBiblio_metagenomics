@@ -1,15 +1,22 @@
 \section{Discussions et Conclusion}
 
-	\begin{itemize}
-		\item[•] intérêt des deux méthodes aux contextes actuels de l'étude
-                  \begin{itemize}
-                  \item facteur limitant (bottleneck) pour la métagénomique actuelle: juste avant l'apparition de la NGS, les reads d'un projet métagénome est de l'ordre de 2 millions de reads (1 milliard de bp), après l'apparition de la NGS, le nombre de reads produits par un seul projet est de l'ordre de milliard \cite{Kumar2015} $\rightarrow$ ces énormes données produites par la NGS demanderai plutôt de traitement bioinformatique à moindre coût en temps et en espace, reads de NGS de courte séquence par rapport au Sanger $\Rightarrow$ difficulté d'analyse notamment pour l'assemblage de novo, \cite{Kumar2015} rélate plus les limites au niveau de l'assemblage de novo des métagénomes
-                  \item l'amélioration de la sensibilité apportée par la méthode des k-mers espacés est-elle primordiale pour surmonter ces limites? Etant donnée que celle-ci comporte des coût additionnels en temps et espace?
-                  \end{itemize}
-		\item[•] perspective (intérêt futur de la nouvelle approche?)
-                  \begin{itemize}                
-                  \item la méthode des k-mers présentent-elle un intérêt majeur pour la classification métagénomique dans le futur proche?
-                  \item les autres tentatives/pistes d'amélioration de la classification métagénomique: développement continuel des algo pour la métagénomique \cite{Kumar2015}, text mining et métagénomique \cite{Wang2015}
-                  \item \cite{Ramazotti2015} propose une nouvelle méthode combinant le shotgun sequencing et l'amplicon-based metagenomic pour la classification non supervisée (taxonomy independant)
-                  \end{itemize}
-	\end{itemize}
+
+\subsection{L'utilisation des k-mers espacés represente-t-elle rééllement des intérêts à la métagénomique actuelle?}
+
+Juste avant l'apparition de la NGS, un projet de métagénomique compte environ 2 millions de reads (1 milliard de bp). Après l'apparition de la NGS, ce nombre devient de l'ordre de milliard de reads \cite{Kumar2015} (produit en un seul run de plateforme NGS). Ces énormes données produites par la NGS imposent alors depuis un grand défit sur le temps de calcul et l'espace mémoire lors de leur traitement.
+
+En outre, les courtes séquences des reads produites par le NGS (par rapport au séquençage Sanger utilisé auparavant) apporte une grande difficulté d'analyse notamment pour l'assemblage de novo \cite{Kumar2015}.
+Face à ces défis qui attends encore la métagénomique actuelle, la question se pose si l'amélioration de la sensibilité apportée par la méthode des k-mers espacés est-elle primordiale. Etant donné que cette amélioration est aussi accompagné de coût additionnel en temps et en espace, la réponse semble plutôt négative. Ce qui ne veut pas dire que ce travail inutile, il est certe intéressant mais devrait être accompagné par des amélioration au niveau facilité de calcul et de stockage. D'ailleurs, beaucoup d'autres travaux vont dans la même direction en essayant d'améliorer la performance de la classification métagénomique.  
+
+
+\subsection{Les autres tentatives d'amélioration de la classification métagénomique}
+
+Le nombre de travaux effectués sur l'algorithme de classification métagénomique montre l'intérêt dans un futur proche de l'amélioration de cette performance de la classification métagénomique.
+Parmi ces travaux, on peut citer celui de Kumar et al. \cite{Kumar2015} et de Wang et al. \cite{Wang2015}. 
+Ce dernier propose le text mining appliqué dans la classification métagénomique.
+Ramazotti et al. propose aussi une nouvelle méthode de métagénomique combinant la classification non dirigée et la classification dirigée pour améliorer la classification à taxonomie indépendante c'est à dire sans utilisation de génomes de références.
+
+%\centering
+%***
+
+%\newpage{}

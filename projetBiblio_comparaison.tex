@@ -1,21 +1,43 @@
-\section{Comparaison des deux algorithmes d'alignement}
+\section{Comparaison des résultats de classification utilisant les k-mers contigus versus k-mers espacés}
 
-	\begin{itemize}
-        \item[•] comparaison sur la sensibilité-spécificité des résultats
-          \begin{itemize}
-          \item utilisation de Kraken \cite{Wood2014} adapté pour traiter les k-mers espacées $\rightarrow$ seed-Kraken
-          \item données utilisée pour la comparaison entre les deux méthodes: 3 données métagénomiques simulées (HiSeq, MiSeq, Simba-5) chacun contenant 10000 séquences et 1 donnée réel construite à partir de 50000 séquences sélectionnées de SRS011086 de l'Human Microbiome Project (HMPtongue)
-          \item MiSeq $\leftarrow$ reads de 10 génomes bactériens (illumina, simulé)
-          \item HMPtongue $\leftarrow$ provenant de reads séléctionnées au hasard (illumina, données réelle)
-          \item base de données (référence): composé de 915 genomes bactériens (un par espèces + génomes de toutes les souches bactériennes à partir desquelles les données simulées ont été construites)
-          \item paramètre de comparaison: sensibilité et précision de classification sur trois niveaux taxonomique: famille, genre et espèce.
-          \item $sensibilite=\frac{nb \phantom{a} de \phantom{a} reads \phantom{a} correctement \phantom{a} classifie}{nb \phantom{a} total \phantom{a} des \phantom{a} reads}$
-          \item $precision=\frac{nb \phantom{a} de \phantom{a} classification \phantom{a} correcte}{nb \phantom{a} total \phantom{a} des \phantom{a} classification}$
-          \item fig3 de l'article $\rightarrow$ gain en sensibilité et en précision avec les k-mers espacées au niveau classification par genre et par famille (poids faible $rightarrow$ plus de sensibilité et moins de précision, poids élevées $rightarrow$ moins de sensibilité mais plus de précision, gain en sensibilité plus marqué au niveau classification par famille), un léger gain en sensibilité et une diminution en précision au niveau classification par espèce
-          \end{itemize}
-        \item[•] comparaison sur l'implémentation, la compléxité temporelle et spatiale
-          \begin{itemize}
-          \item adaptation de Kraken: indexation du complément de chaque k-mers espacés $\Rightarrow$ augmentation de l'espace mémoire utilisée et du temps de recherche de k-mers
-          \item temps de calcul lors de classification augmenté de 3 à 5 fois avec seed-kraken comparé à kraken
-          \end{itemize} 
-	\end{itemize}
+
+\subsection{comparaison sur la sensibilité-spécificité des résultats données par Kraken et Seed-Kraken}
+          
+          Afin de comparer les résultats de classification en utilisant les k-mers contigüs versus k-mers espacées, les auteurs ont choisis d'utiliser Kraken \cite{Wood2014} que nous avons décrit auparavant. Ils ont adapté cet outil afin qu'il puisse intégrer une autre option capable de traiter les k-mers espacées. Cette option, ils l'ont appelé seed-Kraken.
+          
+          Quatre données métagénomiques ont été utilisées pour la comparaison entre les deux options Kraken (k-mers contigüs) et Seed-Kraken (k-mers espacés). Trois de ces données sont des données simulés (HiSeq, MiSeq, Simba-5) dont chacun contient 10000 séquences et 1 est une donnée réelle (HMPtongue) construite à partir de 50000 séquences sélectionnées au hasard dans les séquences contenant dans SRS011086 de l'Human Microbiome Project. HiSeq et MiSeq ont été chacun construites à partir des génomes microbiens réels \cite{Wood2014} et ont déjà été les objets de validation de Kraken \cite{Wood20014}. Pareil pour Simba-5 qui a été construit à partir des données génomiques présentes dans RNA-Seq  \cite{Wood20014}. Tous les reads ont une taille de 100 paires de base.
+
+          Concernant la base de données utilisée comme référence afin de comparer les k-mers, elle est composée de 915 genomes bactériens. Ces génomes sont constituées de l'ensemble des génomes bactériennes ajouté à tous les génomes à partir desquelles les données simulées ont été construites.
+
+          Deux critères ont été utilisés pour comparer les résultats par kraken et par seed-kraken: la sensibilité et précision de la classification. La sensibilité de la classification est le pourcentage de reads correctement classifiés parmi la totalité des reads \eqref{sens}. La précision de la classification est la fraction correcte de toute la classification \eqref{prec}. Ces critères ont été évalués sur trois niveaux taxonomiques différents qui sont la famille, le genre et l'espèce.
+
+\begin{equation}
+\label{sens}          
+sensibilite=\frac{nombre \phantom{a} de \phantom{a} reads \phantom{a} correctement \phantom{a} classifies}{nombre \phantom{a} total \phantom{a} de \phantom{a} reads}
+\end{equation}          
+
+\begin{equation}
+\label{prec}          
+precision=\frac{nombre \phantom{a} de \phantom{a} classifications \phantom{a} correctes}{nombre \phantom{a} total \phantom{a} de \phantom{a} classifications}
+\end{equation}          
+
+La longueur de k-mers (pour les k-mers contigüs) et le poids (pour les k-mers esapés) a été variée de 20, 22, 24, 26, 28 et 31.
+
+\begin{figure}
+  \includegraphics[scale=0.5]{sens_prec_HMPtongue_MiSeq.png}
+  \caption{ \label{sens_prec_HMPtongue_MiSeq} Sensibilité/précision de la classification obtenue avec kraken (point) et de seed-kraken (+) sur les données Miseq et de HMPtongue sur trois niveaux taxonomique (famille, genre, espèce). Les deux triangles en bleu représentent, respectivement, les k-mers contigüs de longueur 24 et 31 lancés avec seed-kraken afin d'évaluer l'effet de l'adaptation apporté à celui-ci} 
+\end{figure}
+
+D'après la figure~\ref{sens_prec_HMPtongue_MiSeq} de \cite{Brinda2015}, au niveau de classification par famille et par genre, on observe, en général, des gains en sensibilité et en précision avec les k-mers espacés.
+Le gain en sensibilité est observé sur n'importe quelle valeur de poids des k-mers espacés. Il est, cependant, beaucoup plus importante pour les poids élevées (à partir de 24). 
+Inversement, le gain en précision est beaucoup plus marqué pour les poids faible (20 et parfois 22) et qu'il est moindre voir inexistant pour les poids élevé (à partir de 24).
+
+Au niveau classification par espèce, un léger gain en sensibilité est accompagné d'une forte perte en précision. Les résultats montrent que plus le poids des k-mers est élevé plus cette perte en précision est importante.
+
+Bref, le k-mers espacés apporte des gains significatifs en sensibilité et en précision au niveau famille et genre. Cependant, au niveau classification par espèce, il n'apporte qu'une faible amélioration de la sensibilité et diminue la précision de la classification.
+
+ 
+\subsection{Le coût en temps de calcul et en espace mémoire de l'utilisation de k-mers espacés}
+
+Kraken n'indexe pas le complémentaire des k-mers. Afin de tenir compte ces derniers, seed-kaken dois indexer aussi les complémentaires des k-mers espacées étant donné que ceux-ci ne peut pas être obtenu directement. Par conséquent, ce rajout d'indexation augugmente l'espace mémoire utilisée ainsi que le temps de recherche de k-mers.
+Le temps de calcul augmente alors de l'ordre de 3 à 5 fois avec seed-kraken comparé à kraken.
